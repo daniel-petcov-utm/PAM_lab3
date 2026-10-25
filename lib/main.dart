@@ -7,6 +7,7 @@ import 'widgets/recommended_products.dart';
 import 'widgets/top_collections.dart';
 import 'widgets/category_promos.dart';
 import 'widgets/category_selector.dart';
+import 'widgets/home_header.dart';
 
 void main() {
   runApp(const MyApp());
@@ -42,6 +43,8 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
+              HomeHeader(),
+              SizedBox(height: 16),
               CategorySelector(),
               SizedBox(height: 8),
               HeroBannerSlider(),
