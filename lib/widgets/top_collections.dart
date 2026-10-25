@@ -171,7 +171,7 @@ class _TopCollectionCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 19),
+                    const SizedBox(height: 12),
                     Text(
                       collection.title.replaceFirst(' & ', '\n& '),
                       style: TextStyle(
