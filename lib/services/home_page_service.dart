@@ -69,4 +69,18 @@ class HomePageService {
 
     return NewCollection.fromJson(collectionJson);
   }
+
+  Future<List<FeatureProduct>> fetchRecommendedProducts() async {
+    final jsonString = await rootBundle.loadString('data/lab-v1.json');
+
+    final Map<String, dynamic> data =
+        jsonDecode(jsonString) as Map<String, dynamic>;
+
+    final homePage = data['homePage'] as Map<String, dynamic>;
+    final recommendedJson = homePage['recommended'] as List<dynamic>;
+
+    return recommendedJson
+        .map((item) => FeatureProduct.fromJson(item as Map<String, dynamic>))
+        .toList();
+  }
 }

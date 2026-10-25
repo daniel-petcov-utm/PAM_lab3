@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'widgets/hero_banner_slider.dart';
 import 'widgets/featured_products.dart';
 import 'widgets/new_collection_banner.dart';
+import 'widgets/recommended_products.dart';
 
 void main() {
   runApp(const MyApp());
@@ -43,6 +44,8 @@ class HomePage extends StatelessWidget {
               FeaturedProducts(),
               SizedBox(height: 28),
               NewCollectionBanner(),
+              SizedBox(height: 28),
+              RecommendedProducts(),
             ],
           ),
         ),
