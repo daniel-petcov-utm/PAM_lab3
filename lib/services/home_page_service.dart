@@ -6,6 +6,7 @@ import '../models/hero_banner.dart';
 import '../models/feature_product.dart';
 import '../models/product_details.dart';
 import '../models/new_collection.dart';
+import '../models/top_collection.dart';
 
 class HomePageService {
   Future<HeroBanner> fetchHeroBanner() async {
@@ -81,6 +82,20 @@ class HomePageService {
 
     return recommendedJson
         .map((item) => FeatureProduct.fromJson(item as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<List<TopCollection>> fetchTopCollections() async {
+    final jsonString = await rootBundle.loadString('data/lab-v1.json');
+
+    final Map<String, dynamic> data =
+        jsonDecode(jsonString) as Map<String, dynamic>;
+
+    final homePage = data['homePage'] as Map<String, dynamic>;
+    final collectionsJson = homePage['topCollections'] as List<dynamic>;
+
+    return collectionsJson
+        .map((item) => TopCollection.fromJson(item as Map<String, dynamic>))
         .toList();
   }
 }

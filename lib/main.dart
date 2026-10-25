@@ -4,6 +4,7 @@ import 'widgets/hero_banner_slider.dart';
 import 'widgets/featured_products.dart';
 import 'widgets/new_collection_banner.dart';
 import 'widgets/recommended_products.dart';
+import 'widgets/top_collections.dart';
 
 void main() {
   runApp(const MyApp());
@@ -46,6 +47,8 @@ class HomePage extends StatelessWidget {
               NewCollectionBanner(),
               SizedBox(height: 28),
               RecommendedProducts(),
+              SizedBox(height: 28),
+              TopCollections(),
             ],
           ),
         ),
