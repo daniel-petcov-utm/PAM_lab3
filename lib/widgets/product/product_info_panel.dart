@@ -4,7 +4,6 @@ import '../../models/product_details.dart';
 import 'product_color_selector.dart';
 import 'product_rating.dart';
 import 'product_size_selector.dart';
-import 'product_description.dart';
 
 class ProductInfoPanel extends StatefulWidget {
   final ProductDetails product;
@@ -125,10 +124,6 @@ class _ProductInfoPanelState extends State<ProductInfoPanel> {
                   ),
                 ),
               ],
-            ),
-            ProductDescription(
-              description: product.description,
-              initiallyExpanded: product.descriptionExpanded,
             ),
           ],
         ),

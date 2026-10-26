@@ -17,6 +17,9 @@ class ProductDetails {
   final String description;
   final bool descriptionExpanded;
 
+  final List<RatingBreakdownItem> ratingBreakdown;
+  final List<ProductReview> reviews;
+
   const ProductDetails({
     required this.id,
     required this.name,
@@ -35,6 +38,9 @@ class ProductDetails {
     required this.isFavorite,
     required this.description,
     required this.descriptionExpanded,
+
+    required this.ratingBreakdown,
+    required this.reviews,
   });
 
   factory ProductDetails.fromJson(Map<String, dynamic> json) {
@@ -66,6 +72,17 @@ class ProductDetails {
       isFavorite: actions['isFavorite'] as bool? ?? false,
       description: json['description'] as String,
       descriptionExpanded: json['descriptionExpanded'] as bool? ?? false,
+
+      ratingBreakdown: (json['ratingBreakdown'] as List<dynamic>)
+          .map(
+            (item) =>
+                RatingBreakdownItem.fromJson(item as Map<String, dynamic>),
+          )
+          .toList(),
+
+      reviews: (json['reviews'] as List<dynamic>)
+          .map((item) => ProductReview.fromJson(item as Map<String, dynamic>))
+          .toList(),
     );
   }
 }
@@ -86,6 +103,49 @@ class ProductColor {
       id: json['id'] as String,
       name: json['name'] as String,
       value: json['value'] as String,
+    );
+  }
+}
+
+class RatingBreakdownItem {
+  final int stars;
+  final int percentage;
+
+  const RatingBreakdownItem({required this.stars, required this.percentage});
+
+  factory RatingBreakdownItem.fromJson(Map<String, dynamic> json) {
+    return RatingBreakdownItem(
+      stars: json['stars'] as int,
+      percentage: json['percentage'] as int,
+    );
+  }
+}
+
+class ProductReview {
+  final String id;
+  final String author;
+  final String avatarUrl;
+  final double rating;
+  final String createdAtLabel;
+  final String text;
+
+  const ProductReview({
+    required this.id,
+    required this.author,
+    required this.avatarUrl,
+    required this.rating,
+    required this.createdAtLabel,
+    required this.text,
+  });
+
+  factory ProductReview.fromJson(Map<String, dynamic> json) {
+    return ProductReview(
+      id: json['id'] as String,
+      author: json['author'] as String,
+      avatarUrl: json['avatarUrl'] as String,
+      rating: (json['rating'] as num).toDouble(),
+      createdAtLabel: json['createdAtLabel'] as String,
+      text: json['text'] as String,
     );
   }
 }
