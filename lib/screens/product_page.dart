@@ -6,6 +6,7 @@ import '../widgets/product/product_image_gallery.dart';
 import '../widgets/product/product_info_panel.dart';
 import '../widgets/product/product_reviews.dart';
 import '../widgets/product/product_description.dart';
+import '../widgets/product/similar_products.dart';
 
 class ProductPage extends StatefulWidget {
   final String productId;
@@ -69,6 +70,8 @@ class _ProductPageState extends State<ProductPage> {
                   ),
 
                   ProductReviews(product: product),
+
+                  SimilarProducts(products: product.similarProducts),
                 ],
               ),
             ),

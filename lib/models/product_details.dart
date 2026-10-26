@@ -1,3 +1,5 @@
+import 'similar_product.dart';
+
 class ProductDetails {
   final String id;
   final String name;
@@ -20,6 +22,8 @@ class ProductDetails {
   final List<RatingBreakdownItem> ratingBreakdown;
   final List<ProductReview> reviews;
 
+  final List<SimilarProduct> similarProducts;
+
   const ProductDetails({
     required this.id,
     required this.name,
@@ -41,6 +45,8 @@ class ProductDetails {
 
     required this.ratingBreakdown,
     required this.reviews,
+
+    required this.similarProducts,
   });
 
   factory ProductDetails.fromJson(Map<String, dynamic> json) {
@@ -82,6 +88,10 @@ class ProductDetails {
 
       reviews: (json['reviews'] as List<dynamic>)
           .map((item) => ProductReview.fromJson(item as Map<String, dynamic>))
+          .toList(),
+
+      similarProducts: (json['similarProducts'] as List<dynamic>)
+          .map((item) => SimilarProduct.fromJson(item as Map<String, dynamic>))
           .toList(),
     );
   }
