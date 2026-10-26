@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lab_3/services/home_page_service.dart';
 
 import '../models/store_title.dart';
 import '../services/home_page_service.dart';

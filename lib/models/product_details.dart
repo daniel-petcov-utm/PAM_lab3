@@ -63,34 +63,36 @@ class ProductDetails {
       galleryImageUrls:
           (json['galleryImageUrls'] as List<dynamic>?)?.cast<String>() ??
           [json['mainImageUrl'] as String],
-      rating: (json['rating'] as num).toDouble(),
-      ratingCount: json['ratingCount'] as int,
-      reviewCount: json['reviewCount'] as int,
-      availableColors: (json['availableColors'] as List<dynamic>)
+      rating: (json['rating'] as num? ?? 0).toDouble(),
+      ratingCount: json['ratingCount'] as int? ?? 0,
+      reviewCount: json['reviewCount'] as int? ?? 0,
+      availableColors: (json['availableColors'] as List<dynamic>? ?? const [])
           .map((item) => ProductColor.fromJson(item as Map<String, dynamic>))
           .toList(),
-      selectedColor: json['selectedColor'] as String,
-      availableSizes: (json['availableSizes'] as List<dynamic>).cast<String>(),
-      selectedSize: json['selectedSize'] as String,
+      selectedColor: json['selectedColor'] as String? ?? '',
+      availableSizes: (json['availableSizes'] as List<dynamic>? ?? const [])
+          .cast<String>(),
+      selectedSize: json['selectedSize'] as String? ?? '',
       sizeAvailability: availability.map(
         (key, value) => MapEntry(key, value as bool),
       ),
       isFavorite: actions['isFavorite'] as bool? ?? false,
-      description: json['description'] as String,
+      description:
+          json['description'] as String? ?? 'A GemStore collection item.',
       descriptionExpanded: json['descriptionExpanded'] as bool? ?? false,
 
-      ratingBreakdown: (json['ratingBreakdown'] as List<dynamic>)
+      ratingBreakdown: (json['ratingBreakdown'] as List<dynamic>? ?? const [])
           .map(
             (item) =>
                 RatingBreakdownItem.fromJson(item as Map<String, dynamic>),
           )
           .toList(),
 
-      reviews: (json['reviews'] as List<dynamic>)
+      reviews: (json['reviews'] as List<dynamic>? ?? const [])
           .map((item) => ProductReview.fromJson(item as Map<String, dynamic>))
           .toList(),
 
-      similarProducts: (json['similarProducts'] as List<dynamic>)
+      similarProducts: (json['similarProducts'] as List<dynamic>? ?? const [])
           .map((item) => SimilarProduct.fromJson(item as Map<String, dynamic>))
           .toList(),
     );

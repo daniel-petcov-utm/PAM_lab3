@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'cubits/favorites_cubit.dart';
+import 'cubits/home_cubit.dart';
+import 'services/home_page_service.dart';
 
 import 'widgets/hero_banner_slider.dart';
 import 'widgets/featured_products.dart';
@@ -18,15 +23,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'GemStore',
-      theme: ThemeData(
-        useMaterial3: true,
-        scaffoldBackgroundColor: Colors.white,
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF34343B)),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => FavoritesCubit()),
+        BlocProvider(create: (_) => HomeCubit(HomePageService())..load()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'GemStore',
+        theme: ThemeData(
+          useMaterial3: true,
+          scaffoldBackgroundColor: Colors.white,
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF34343B)),
+        ),
+        home: const HomePage(),
       ),
-      home: const HomePage(),
     );
   }
 }
@@ -36,32 +47,56 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              HomeHeader(),
-              SizedBox(height: 16),
-              CategorySelector(),
-              SizedBox(height: 8),
-              HeroBannerSlider(),
-              SizedBox(height: 32),
-              FeaturedProducts(),
-              SizedBox(height: 28),
-              NewCollectionBanner(),
-              SizedBox(height: 28),
-              RecommendedProducts(),
-              SizedBox(height: 28),
-              TopCollections(),
-              SizedBox(height: 16),
-              CategoryPromos(),
-            ],
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (context, state) {
+        if (state is HomeLoading) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
+        if (state is HomeError) {
+          return Scaffold(
+            body: Center(
+              child: FilledButton(
+                onPressed: () => context.read<HomeCubit>().load(),
+                child: const Text('Retry loading homepage'),
+              ),
+            ),
+          );
+        }
+        if (state is HomeEmpty) {
+          return const Scaffold(
+            body: Center(child: Text('No products available.')),
+          );
+        }
+        return Scaffold(
+          body: SafeArea(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  HomeHeader(),
+                  SizedBox(height: 16),
+                  CategorySelector(),
+                  SizedBox(height: 8),
+                  HeroBannerSlider(),
+                  SizedBox(height: 32),
+                  FeaturedProducts(),
+                  SizedBox(height: 28),
+                  NewCollectionBanner(),
+                  SizedBox(height: 28),
+                  RecommendedProducts(),
+                  SizedBox(height: 28),
+                  TopCollections(),
+                  SizedBox(height: 16),
+                  CategoryPromos(),
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

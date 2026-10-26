@@ -12,11 +12,16 @@ import '../models/product_category.dart';
 import '../models/store_title.dart';
 
 class HomePageService {
-  Future<HeroBanner> fetchHeroBanner() async {
-    final jsonString = await rootBundle.loadString('data/lab-v1.json');
+  static Future<Map<String, dynamic>>? _dataFuture;
 
-    final Map<String, dynamic> data =
-        jsonDecode(jsonString) as Map<String, dynamic>;
+  Future<Map<String, dynamic>> _loadData() {
+    return _dataFuture ??= rootBundle
+        .loadString('data/lab-v1.json')
+        .then((jsonString) => jsonDecode(jsonString) as Map<String, dynamic>);
+  }
+
+  Future<HeroBanner> fetchHeroBanner() async {
+    final data = await _loadData();
 
     final homePage = data['homePage'] as Map<String, dynamic>;
     final bannerJson = homePage['heroBanner'] as Map<String, dynamic>;
@@ -25,10 +30,7 @@ class HomePageService {
   }
 
   Future<List<FeatureProduct>> fetchFeatureProducts() async {
-    final jsonString = await rootBundle.loadString('data/lab-v1.json');
-
-    final Map<String, dynamic> data =
-        jsonDecode(jsonString) as Map<String, dynamic>;
+    final data = await _loadData();
 
     final homePage = data['homePage'] as Map<String, dynamic>;
 
@@ -42,10 +44,7 @@ class HomePageService {
   }
 
   Future<ProductDetails?> fetchProductById(String id) async {
-    final jsonString = await rootBundle.loadString('data/lab-v1.json');
-
-    final Map<String, dynamic> data =
-        jsonDecode(jsonString) as Map<String, dynamic>;
+    final data = await _loadData();
 
     final productPage = data['productPage'] as Map<String, dynamic>;
 
@@ -63,10 +62,7 @@ class HomePageService {
   }
 
   Future<NewCollection> fetchNewCollection() async {
-    final jsonString = await rootBundle.loadString('data/lab-v1.json');
-
-    final Map<String, dynamic> data =
-        jsonDecode(jsonString) as Map<String, dynamic>;
+    final data = await _loadData();
 
     final homePage = data['homePage'] as Map<String, dynamic>;
     final collectionJson = homePage['newCollection'] as Map<String, dynamic>;
@@ -75,10 +71,7 @@ class HomePageService {
   }
 
   Future<List<FeatureProduct>> fetchRecommendedProducts() async {
-    final jsonString = await rootBundle.loadString('data/lab-v1.json');
-
-    final Map<String, dynamic> data =
-        jsonDecode(jsonString) as Map<String, dynamic>;
+    final data = await _loadData();
 
     final homePage = data['homePage'] as Map<String, dynamic>;
     final recommendedJson = homePage['recommended'] as List<dynamic>;
@@ -89,10 +82,7 @@ class HomePageService {
   }
 
   Future<List<TopCollection>> fetchTopCollections() async {
-    final jsonString = await rootBundle.loadString('data/lab-v1.json');
-
-    final Map<String, dynamic> data =
-        jsonDecode(jsonString) as Map<String, dynamic>;
+    final data = await _loadData();
 
     final homePage = data['homePage'] as Map<String, dynamic>;
     final collectionsJson = homePage['topCollections'] as List<dynamic>;
@@ -103,10 +93,7 @@ class HomePageService {
   }
 
   Future<List<CategoryPromo>> fetchCategoryPromos() async {
-    final jsonString = await rootBundle.loadString('data/lab-v1.json');
-
-    final Map<String, dynamic> data =
-        jsonDecode(jsonString) as Map<String, dynamic>;
+    final data = await _loadData();
 
     final homePage = data['homePage'] as Map<String, dynamic>;
     final promosJson = homePage['categoryPromos'] as List<dynamic>;
@@ -117,10 +104,7 @@ class HomePageService {
   }
 
   Future<List<ProductCategory>> fetchCategories() async {
-    final jsonString = await rootBundle.loadString('data/lab-v1.json');
-
-    final Map<String, dynamic> data =
-        jsonDecode(jsonString) as Map<String, dynamic>;
+    final data = await _loadData();
 
     final homePage = data['homePage'] as Map<String, dynamic>;
     final categoriesJson = homePage['categories'] as List<dynamic>;

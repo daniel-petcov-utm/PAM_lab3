@@ -77,7 +77,7 @@ class _SimilarProductsState extends State<SimilarProducts> {
                         bottom: 12,
                       ),
                       itemCount: widget.products.length,
-                      separatorBuilder: (_, __) => const SizedBox(width: 19),
+                      separatorBuilder: (_, index) => const SizedBox(width: 19),
                       itemBuilder: (context, index) {
                         final product = widget.products[index];
 

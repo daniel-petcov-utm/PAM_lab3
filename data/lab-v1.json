@@ -143,7 +143,11 @@
           }
         ],
         "selectedColor": "beige",
-        "availableSizes": ["S", "M", "L"],
+        "availableSizes": [
+          "S",
+          "M",
+          "L"
+        ],
         "selectedSize": "L",
         "sizeAvailability": {
           "S": false,
@@ -151,11 +155,26 @@
           "L": true
         },
         "ratingBreakdown": [
-          { "stars": 5, "percentage": 80 },
-          { "stars": 4, "percentage": 12 },
-          { "stars": 3, "percentage": 5 },
-          { "stars": 2, "percentage": 3 },
-          { "stars": 1, "percentage": 0 }
+          {
+            "stars": 5,
+            "percentage": 80
+          },
+          {
+            "stars": 4,
+            "percentage": 12
+          },
+          {
+            "stars": 3,
+            "percentage": 5
+          },
+          {
+            "stars": 2,
+            "percentage": 3
+          },
+          {
+            "stars": 1,
+            "percentage": 0
+          }
         ],
         "reviews": [
           {
@@ -202,6 +221,231 @@
           "isFavorite": true,
           "canAddToCart": true,
           "addToCartLabel": "Add To Cart"
+        }
+      },
+      {
+        "id": "p001",
+        "name": "Turtleneck Sweater",
+        "price": 39.99,
+        "currency": "USD",
+        "mainImageUrl": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=1000&q=80",
+        "description": "A soft turtleneck sweater designed for comfortable everyday layering.",
+        "availableColors": [
+          {
+            "id": "cream",
+            "name": "Cream",
+            "value": "#EEE4D5"
+          },
+          {
+            "id": "black",
+            "name": "Black",
+            "value": "#000000"
+          }
+        ],
+        "selectedColor": "cream",
+        "availableSizes": [
+          "S",
+          "M",
+          "L"
+        ],
+        "selectedSize": "M",
+        "sizeAvailability": {
+          "S": true,
+          "M": true,
+          "L": false
+        },
+        "actions": {
+          "isFavorite": false
+        }
+      },
+      {
+        "id": "p002",
+        "name": "Long Sleeve Dress",
+        "price": 45.0,
+        "currency": "USD",
+        "mainImageUrl": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1000&q=80",
+        "description": "An elegant long-sleeve dress with a relaxed, flattering silhouette.",
+        "availableColors": [
+          {
+            "id": "rose",
+            "name": "Rose",
+            "value": "#D99AA5"
+          },
+          {
+            "id": "navy",
+            "name": "Navy",
+            "value": "#1E2E4D"
+          }
+        ],
+        "selectedColor": "rose",
+        "availableSizes": [
+          "S",
+          "M",
+          "L"
+        ],
+        "selectedSize": "S",
+        "sizeAvailability": {
+          "S": true,
+          "M": true,
+          "L": true
+        },
+        "actions": {
+          "isFavorite": false
+        }
+      },
+      {
+        "id": "p004",
+        "name": "White fashion hoodie",
+        "price": 29.0,
+        "currency": "USD",
+        "mainImageUrl": "https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=1000&q=80",
+        "description": "A lightweight hoodie with a clean, modern everyday look.",
+        "availableColors": [
+          {
+            "id": "white",
+            "name": "White",
+            "value": "#FFFFFF"
+          }
+        ],
+        "selectedColor": "white",
+        "availableSizes": [
+          "S",
+          "M",
+          "L"
+        ],
+        "selectedSize": "M",
+        "sizeAvailability": {
+          "S": true,
+          "M": true,
+          "L": true
+        },
+        "actions": {
+          "isFavorite": false
+        }
+      },
+      {
+        "id": "p005",
+        "name": "Cotton T-shirt",
+        "price": 30.0,
+        "currency": "USD",
+        "mainImageUrl": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1000&q=80",
+        "description": "A classic cotton T-shirt made for effortless daily styling.",
+        "availableColors": [
+          {
+            "id": "white",
+            "name": "White",
+            "value": "#FFFFFF"
+          },
+          {
+            "id": "gray",
+            "name": "Gray",
+            "value": "#8A8A8A"
+          }
+        ],
+        "selectedColor": "white",
+        "availableSizes": [
+          "S",
+          "M",
+          "L"
+        ],
+        "selectedSize": "M",
+        "sizeAvailability": {
+          "S": true,
+          "M": false,
+          "L": true
+        },
+        "actions": {
+          "isFavorite": false
+        }
+      },
+      {
+        "id": "p006",
+        "name": "Rise Crop Hoodie",
+        "price": 43.0,
+        "currency": "USD",
+        "mainImageUrl": "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1000&q=80",
+        "description": "A cropped hoodie for easy active and casual outfits.",
+        "availableColors": [
+          {
+            "id": "sand",
+            "name": "Sand",
+            "value": "#D6BFA9"
+          }
+        ],
+        "selectedColor": "sand",
+        "availableSizes": [
+          "S",
+          "M",
+          "L"
+        ],
+        "selectedSize": "S",
+        "sizeAvailability": {
+          "S": true,
+          "M": true,
+          "L": true
+        },
+        "actions": {
+          "isFavorite": false
+        }
+      },
+      {
+        "id": "p007",
+        "name": "Gym Crop Top",
+        "price": 39.99,
+        "currency": "USD",
+        "mainImageUrl": "https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=1000&q=80",
+        "description": "A supportive crop top built for movement and comfort.",
+        "availableColors": [
+          {
+            "id": "coral",
+            "name": "Coral",
+            "value": "#EF6262"
+          }
+        ],
+        "selectedColor": "coral",
+        "availableSizes": [
+          "S",
+          "M",
+          "L"
+        ],
+        "selectedSize": "M",
+        "sizeAvailability": {
+          "S": true,
+          "M": true,
+          "L": false
+        },
+        "actions": {
+          "isFavorite": false
+        }
+      },
+      {
+        "id": "p008",
+        "name": "Sport Sweatshirt",
+        "price": 47.99,
+        "currency": "USD",
+        "mainImageUrl": "https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=1000&q=80",
+        "description": "A warm sport sweatshirt with a relaxed fit.",
+        "availableColors": [
+          {
+            "id": "charcoal",
+            "name": "Charcoal",
+            "value": "#34343B"
+          }
+        ],
+        "selectedColor": "charcoal",
+        "availableSizes": [
+          "S",
+          "M",
+          "L"
+        ],
+        "selectedSize": "L",
+        "sizeAvailability": {
+          "S": false,
+          "M": true,
+          "L": true
+        },
+        "actions": {
+          "isFavorite": false
         }
       }
     ]

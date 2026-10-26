@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../cubits/favorites_cubit.dart';
 import '../../models/product_details.dart';
 import 'circle_action_button.dart';
 
@@ -19,7 +21,6 @@ class ProductImageGallery extends StatefulWidget {
 
 class _ProductImageGalleryState extends State<ProductImageGallery> {
   late final PageController _pageController;
-  late bool _isFavorite;
   int _activeImageIndex = 0;
 
   List<String> get _images {
@@ -31,7 +32,10 @@ class _ProductImageGalleryState extends State<ProductImageGallery> {
   void initState() {
     super.initState();
     _pageController = PageController();
-    _isFavorite = widget.product.isFavorite;
+    context.read<FavoritesCubit>().initialize(
+      widget.product.id,
+      widget.product.isFavorite,
+    );
   }
 
   @override
@@ -85,13 +89,17 @@ class _ProductImageGalleryState extends State<ProductImageGallery> {
           Positioned(
             right: 24,
             top: 24,
-            child: CircleActionButton(
-              icon: _isFavorite ? Icons.favorite : Icons.favorite_border,
-              iconColor: _isFavorite
-                  ? const Color(0xFFFF696D)
-                  : const Color(0xFF303030),
-              onTap: () {
-                setState(() => _isFavorite = !_isFavorite);
+            child: BlocBuilder<FavoritesCubit, Set<String>>(
+              builder: (context, favorites) {
+                final isFavorite = favorites.contains(widget.product.id);
+                return CircleActionButton(
+                  icon: isFavorite ? Icons.favorite : Icons.favorite_border,
+                  iconColor: isFavorite
+                      ? const Color(0xFFFF696D)
+                      : const Color(0xFF303030),
+                  onTap: () =>
+                      context.read<FavoritesCubit>().toggle(widget.product.id),
+                );
               },
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../models/product_details.dart';
+import '../cubits/product_cubit.dart';
 import '../services/home_page_service.dart';
 import '../widgets/product/product_image_gallery.dart';
 import '../widgets/product/product_info_panel.dart';
@@ -9,51 +10,55 @@ import '../widgets/product/product_description.dart';
 import '../widgets/product/similar_products.dart';
 import '../widgets/product/add_to_cart_button.dart';
 
-class ProductPage extends StatefulWidget {
+class ProductPage extends StatelessWidget {
   final String productId;
 
   const ProductPage({super.key, required this.productId});
 
   @override
-  State<ProductPage> createState() => _ProductPageState();
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => ProductCubit(HomePageService())..load(productId),
+      child: _ProductView(productId: productId),
+    );
+  }
 }
 
-class _ProductPageState extends State<ProductPage> {
-  final HomePageService _service = HomePageService();
+class _ProductView extends StatelessWidget {
+  final String productId;
 
-  late Future<ProductDetails?> _productFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    _productFuture = _service.fetchProductById(widget.productId);
-  }
+  const _ProductView({required this.productId});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFFFFCFB),
-      body: FutureBuilder<ProductDetails?>(
-        future: _productFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          if (snapshot.hasError) {
-            return const Center(child: Text('Could not load product.'));
-          }
-
-          final product = snapshot.data;
-
-          if (product == null) {
-            return Scaffold(
-              appBar: AppBar(title: const Text('Product')),
-              body: const Center(child: Text('Product not found')),
-            );
-          }
-
-          return SafeArea(
+    return BlocBuilder<ProductCubit, ProductState>(
+      builder: (context, state) {
+        if (state is ProductLoading) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
+        if (state is ProductError) {
+          return Scaffold(
+            body: Center(
+              child: FilledButton(
+                onPressed: () => context.read<ProductCubit>().load(productId),
+                child: const Text('Retry loading product'),
+              ),
+            ),
+          );
+        }
+        if (state is ProductNotFound) {
+          return Scaffold(
+            appBar: AppBar(title: const Text('Product')),
+            body: const Center(child: Text('Product not found')),
+          );
+        }
+        final product = (state as ProductSuccess).product;
+        return Scaffold(
+          backgroundColor: const Color(0xFFFFFCFB),
+          body: SafeArea(
             bottom: false,
             child: SingleChildScrollView(
               child: Container(
@@ -91,10 +96,10 @@ class _ProductPageState extends State<ProductPage> {
                 ),
               ),
             ),
-          );
-        },
-      ),
-      bottomNavigationBar: const AddToCartButton(),
+          ),
+          bottomNavigationBar: const AddToCartButton(),
+        );
+      },
     );
   }
 }
