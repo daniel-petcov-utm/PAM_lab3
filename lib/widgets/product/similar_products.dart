@@ -68,7 +68,7 @@ class _SimilarProductsState extends State<SimilarProducts> {
             alignment: Alignment.topCenter,
             child: _isExpanded
                 ? SizedBox(
-                    height: 250,
+                    height: 280,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       padding: const EdgeInsets.only(

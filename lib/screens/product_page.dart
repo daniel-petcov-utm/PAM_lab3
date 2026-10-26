@@ -7,6 +7,7 @@ import '../widgets/product/product_info_panel.dart';
 import '../widgets/product/product_reviews.dart';
 import '../widgets/product/product_description.dart';
 import '../widgets/product/similar_products.dart';
+import '../widgets/product/add_to_cart_button.dart';
 
 class ProductPage extends StatefulWidget {
   final String productId;
@@ -55,29 +56,45 @@ class _ProductPageState extends State<ProductPage> {
           return SafeArea(
             bottom: false,
             child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  ProductImageGallery(
-                    product: product,
-                    onBack: () => Navigator.of(context).maybePop(),
-                  ),
+              child: Container(
+                margin: const EdgeInsets.only(top: 12),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x18000000),
+                      blurRadius: 16,
+                      spreadRadius: 1,
+                      offset: Offset(0, -4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    ProductImageGallery(
+                      product: product,
+                      onBack: () => Navigator.of(context).maybePop(),
+                    ),
 
-                  ProductInfoPanel(product: product),
+                    ProductInfoPanel(product: product),
 
-                  ProductDescription(
-                    description: product.description,
-                    initiallyExpanded: product.descriptionExpanded,
-                  ),
+                    ProductDescription(
+                      description: product.description,
+                      initiallyExpanded: product.descriptionExpanded,
+                    ),
 
-                  ProductReviews(product: product),
+                    ProductReviews(product: product),
 
-                  SimilarProducts(products: product.similarProducts),
-                ],
+                    SimilarProducts(products: product.similarProducts),
+                  ],
+                ),
               ),
             ),
           );
         },
       ),
+      bottomNavigationBar: const AddToCartButton(),
     );
   }
 }

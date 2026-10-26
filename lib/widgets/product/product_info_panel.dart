@@ -43,13 +43,14 @@ class _ProductInfoPanelState extends State<ProductInfoPanel> {
     final product = widget.product;
 
     return Transform.translate(
-      offset: const Offset(0, -12),
+      offset: const Offset(0, -10),
+
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.fromLTRB(24, 36, 24, 28),
         decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
           boxShadow: [
             BoxShadow(
               color: Color(0x12000000),
