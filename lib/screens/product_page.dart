@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../models/product_details.dart';
 import '../services/home_page_service.dart';
+import '../widgets/product/product_image_gallery.dart';
+import '../widgets/product/product_info_panel.dart';
 
 class ProductPage extends StatefulWidget {
   final String productId;
@@ -26,7 +28,7 @@ class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Product')),
+      backgroundColor: const Color(0xFFFFFCFB),
       body: FutureBuilder<ProductDetails?>(
         future: _productFuture,
         builder: (context, snapshot) {
@@ -41,14 +43,24 @@ class _ProductPageState extends State<ProductPage> {
           final product = snapshot.data;
 
           if (product == null) {
-            return const Center(child: Text('Product not found'));
+            return Scaffold(
+              appBar: AppBar(title: const Text('Product')),
+              body: const Center(child: Text('Product not found')),
+            );
           }
 
-          return Center(
-            child: Text(
-              product.name,
-              style: Theme.of(context).textTheme.headlineMedium,
-              textAlign: TextAlign.center,
+          return SafeArea(
+            bottom: false,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ProductImageGallery(
+                    product: product,
+                    onBack: () => Navigator.of(context).maybePop(),
+                  ),
+                  ProductInfoPanel(product: product),
+                ],
+              ),
             ),
           );
         },
