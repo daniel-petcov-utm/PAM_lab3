@@ -105,7 +105,7 @@ class _HeroBannerSliderState extends State<HeroBannerSlider> {
                     banner.title,
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 27,
+                      fontSize: 22,
                       height: 1.45,
                       fontWeight: FontWeight.w700,
                     ),

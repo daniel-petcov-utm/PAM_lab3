@@ -40,8 +40,8 @@ class ProductColorSelector extends StatelessWidget {
               child: GestureDetector(
                 onTap: () => onColorSelected(color.id),
                 child: Container(
-                  width: 40,
-                  height: 40,
+                  width: 30,
+                  height: 30,
                   padding: const EdgeInsets.all(4),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,

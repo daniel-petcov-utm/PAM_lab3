@@ -34,8 +34,8 @@ class ProductSizeSelector extends StatelessWidget {
             return GestureDetector(
               onTap: isAvailable ? () => onSizeSelected(size) : null,
               child: Container(
-                width: 40,
-                height: 40,
+                width: 30,
+                height: 30,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,

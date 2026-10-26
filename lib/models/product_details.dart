@@ -14,6 +14,8 @@ class ProductDetails {
   final String selectedSize;
   final Map<String, bool> sizeAvailability;
   final bool isFavorite;
+  final String description;
+  final bool descriptionExpanded;
 
   const ProductDetails({
     required this.id,
@@ -31,6 +33,8 @@ class ProductDetails {
     required this.selectedSize,
     required this.sizeAvailability,
     required this.isFavorite,
+    required this.description,
+    required this.descriptionExpanded,
   });
 
   factory ProductDetails.fromJson(Map<String, dynamic> json) {
@@ -60,6 +64,8 @@ class ProductDetails {
         (key, value) => MapEntry(key, value as bool),
       ),
       isFavorite: actions['isFavorite'] as bool? ?? false,
+      description: json['description'] as String,
+      descriptionExpanded: json['descriptionExpanded'] as bool? ?? false,
     );
   }
 }
